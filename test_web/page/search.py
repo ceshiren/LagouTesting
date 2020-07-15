@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -18,7 +19,12 @@ class Search:
             self.driver.find_element(By.NAME, 'user-selector-renamed').send_keys(author)
             self.driver.find_element(By.CSS_SELECTOR, 'li .selected').click()
 
+        self.driver.save_screenshot("/tmp/1.png")
+        allure.attach.file('/tmp/1.png', attachment_type=allure.attachment_type.PNG)
         self.driver.find_element(By.CSS_SELECTOR, 'button.search-cta').click()
+        self.driver.save_screenshot("/tmp/2.png")
+        allure.attach.file('/tmp/2.png', attachment_type=allure.attachment_type.PNG)
+
         return self
 
     def get_results(self):
